@@ -26,6 +26,7 @@ func main() {
 
 func (m matrix) bfs(s int) {
 	visited := make([]int, len(m))
+	_visited := make([]int, len(m))
 	queue := []int{}
 
 	for i := range visited {
@@ -34,7 +35,6 @@ func (m matrix) bfs(s int) {
 
 	visited[s] = 1
 	queue = append(queue, s)
-	fmt.Printf("Visited : %d\n", s)
 
 	for len(queue) > 0 {
 		node := queue[0]
@@ -43,11 +43,13 @@ func (m matrix) bfs(s int) {
 		for i, connected := range m[node] {
 			if connected == 1 && visited[i] == 0 {
 				visited[i] = 1
-				fmt.Printf("Visited : %d\n", i)
+				_visited[i] = i
 				queue = append(queue, i)
 			}
 		}
 	}
+
+	fmt.Println(_visited)
 }
 
 func (m matrix) addEdge(u int, v int) {
